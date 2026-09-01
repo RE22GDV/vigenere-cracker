@@ -155,6 +155,22 @@ Key options: `--lang en|ru|uk`, `--ui-lang en|ru|uk`, `--alphabet auto|26|32|33`
 
 ## How it works
 
+Full diagrams — pipeline, each attack, scoring, parallelism, module graph — are
+in **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**. The short version:
+
+```mermaid
+flowchart LR
+    A["Ciphertext"] --> B["All alphabet<br/>variants at once"]
+    B --> C{"Text length?"}
+    C -->|"< 60 letters"| D["Brute force<br/>+ dictionary"]
+    C -->|"longer"| E["Frequency analysis:<br/>the key is computed"]
+    D --> F["Candidate pool"]
+    E --> F
+    F --> G["Trigram search score"]
+    G --> H["Quadgrams + dictionary<br/>+ key-length penalty"]
+    H --> I["Ranked answers"]
+```
+
 ### Alphabet variants
 
 The same plaintext enciphered under a 32-letter and a 33-letter Russian alphabet
