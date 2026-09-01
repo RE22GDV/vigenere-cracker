@@ -80,7 +80,8 @@ usable answer.
 
 ## 3. Frequency analysis
 
-The method that makes key length irrelevant. Work grows as **L**, not as **32^L**.
+Cost grows roughly linearly with **L** instead of as **32^L**. Accuracy still
+depends on the ratio N/L - the letters available per key position.
 
 ```mermaid
 flowchart TD

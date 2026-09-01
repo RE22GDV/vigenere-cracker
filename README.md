@@ -11,7 +11,7 @@ The interface is localised into English, Russian and Ukrainian.
 |---|---|
 | **Short texts** (20–30 letters) | brute force over the whole key space, GPU-accelerated |
 | **Long texts** | the key is *computed* from the text, not guessed — a 25-letter key takes ~11 s |
-| **Accuracy** | 100 % on ≥60-letter ciphertexts across all three languages (measured, see below) |
+| **Accuracy** | in the experiment below, the true plaintext ranked first in 100 % of 30 trials per point for ciphertexts of 60+ letters, on all three languages. Needs confirmation on an independent corpus — see [Validity](#validity-and-known-limitations) |
 | **Throughput** | 174 M keys/s on an RTX 4090, 35 M keys/s on a 32-thread CPU |
 | **Requirements** | Python 3.9+ and numpy. CUDA is optional, everything works on the CPU |
 
@@ -36,7 +36,7 @@ The interface is localised into English, Russian and Ukrainian.
 ### The easy way
 
 ```bash
-git clone https://github.com/<you>/vigenere-cracker.git
+git clone https://github.com/RE22GDV/vigenere-cracker.git
 cd vigenere-cracker
 ```
 
@@ -196,9 +196,18 @@ and reports which one won in the `Alph.` column.
 **Frequency analysis** is what makes long texts easy. For a key of length *L* the
 text is split into *L* columns; inside a column the cipher is a plain Caesar
 shift, so the key letter follows from correlating the column's letter frequencies
-with the language. The work grows as *L*, not as 32^*L*, so key length stops
-mattering — a **25-letter key is recovered in about 11 seconds**, while brute
-force would need 33²⁵ ≈ 10³⁷ trials.
+with the language.
+
+The **computational cost grows roughly linearly with *L*, not exponentially**: a
+25-letter key is recovered in about 11 seconds, where brute force would need
+33²⁵ ≈ 10³⁷ trials. Accuracy, however, does *not* become independent of the key
+length. What matters is the ratio
+
+$$R = N \,/\, L$$
+
+where *N* is the ciphertext length and *L* the key length — the number of letters
+available per key position. When *R* gets small the column statistics thin out
+and accuracy degrades regardless of how cheap the search is.
 
 The frequency solution is then refined by **iterated local search**. Plain hill
 climbing is not enough: with a 12-letter key on an 80-letter text each column
