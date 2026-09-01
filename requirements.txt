@@ -1,0 +1,10 @@
+# Core requirement - the search kernels are vectorised numpy.
+numpy>=1.21
+
+# Optional, for the charts produced by benchmarks/run_benchmarks.py
+matplotlib>=3.5
+
+# Optional, enables the CUDA back-end (~10x faster brute force).
+# Install the build that matches your driver, see https://pytorch.org/get-started/locally/
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+# The program runs fine on the CPU without it.
