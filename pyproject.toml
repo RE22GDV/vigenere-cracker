@@ -9,6 +9,7 @@ description = "Vigenere cipher cracker for English, Russian and Ukrainian, with 
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
+authors = [{ name = "Dmitro Handzuk" }]
 keywords = ["vigenere", "cryptanalysis", "cipher", "frequency-analysis", "cuda"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -22,6 +23,10 @@ classifiers = [
     "Topic :: Security :: Cryptography",
 ]
 dependencies = ["numpy>=1.21"]
+
+[project.urls]
+Homepage = "https://github.com/RE22GDV/vigenere-cracker"
+Issues = "https://github.com/RE22GDV/vigenere-cracker/issues"
 
 [project.optional-dependencies]
 gpu = ["torch>=1.13"]
