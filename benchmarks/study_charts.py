@@ -279,7 +279,10 @@ def chart_weights(res):
                 ax2.plot([x for x, _ in ps], [y for _, y in ps], style, marker="o",
                          ms=3, color=COLORS[lang])
     ax1.axvline(6.0, color="#666", ls=":", lw=1)
-    ax1.text(6.1, 2, "shipped 6.0", fontsize=7, color="#666")
+    # Axes-fraction y: a data-space y outside the plotted range would stretch
+    # the figure down to it and leave a large empty band underneath.
+    ax1.annotate("shipped 6.0", xy=(6.2, 0.04), xycoords=("data", "axes fraction"),
+                 fontsize=7, color="#666")
     ax1.set_xlabel("dictionary weight w"); ax1.set_ylabel("top-1, %")
     ax1.set_title("Dictionary weight (dashed = validation, solid = test)")
     ax1.legend(fontsize=6, ncol=2)
