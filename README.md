@@ -7,6 +7,10 @@ based on how much ciphertext you have.
 
 The interface is localised into English, Russian and Ukrainian.
 
+![Vigenere Cracker, 90-letter English ciphertext solved](docs/screenshot.png)
+
+*A 90-letter English ciphertext broken in two seconds. The strategy hint on the right explains the choice — the text is long enough that the key is computed by frequency analysis rather than guessed — and the log below shows each key length being tried. The correct key, `silver`, is on top.*
+
 | | |
 |---|---|
 | **Short texts** (20–30 letters) | brute force over the whole key space, GPU-accelerated |
